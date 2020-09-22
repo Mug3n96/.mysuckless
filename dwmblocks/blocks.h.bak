@@ -1,0 +1,13 @@
+//Modify this file to change what commands output to your statusbar, and recompile using the make command.
+static const Block blocks[] = {
+	/*Icon*/		/*Command*/									/*Update Interval*/	/*Update Signal*/
+	{"🔆", 			"xbacklight | awk '{sub(/\\.[0-9]*/, \"\"); print}'" ,				0,			5},
+	{"💾", 			"free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",			30,			4},
+	{"🎧", 			"amixer get Master |grep % |awk '{print $5}'|sed 's/[^0-9\%]//g'",		0,			3},
+	{"🔋", 			"acpi | awk '{print $4}'",					 		30,			2},
+	{"📅", 			"date '+%b %d (%a) %H:%M'",							60,			1},
+};
+
+//sets delimeter between status commands. NULL character ('\0') means no delimeter.
+static char delim[] = " | ";
+static unsigned int delimLen = 8;
